@@ -1,14 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TextInput, Platform } from 'react-native';
+import { Ionicons } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
 import axios from "axios";
 import WebView from "react-native-webview";
-import { Ionicons } from "@expo/vector-icons";
 
 export default class HomeScreen extends React.Component {
     constructor(){
         super();
         this.state={
-            url: 'https://df1aca013c38.ngrok.io',
+            url: 'https://17de7f6edd27.ngrok.io',
             details: {},
             loggedIn: false,
             userName: "",
@@ -45,6 +46,8 @@ export default class HomeScreen extends React.Component {
         if(!this.state.loggedIn){
             return (
                 <View style={styles.container}>
+                    <StatusBar style="light" backgroundColor="tomato" />
+
                     <View style={[styles.header, {justifyContent: 'center'}]}>
                         <Text style={styles.headerText}>Login / Signup</Text>
                     </View>
@@ -67,6 +70,8 @@ export default class HomeScreen extends React.Component {
                 var disabled = this.state.articleLoading;
                 return (
                     <View style={styles.container}>
+                        <StatusBar style="light" backgroundColor="tomato" />
+                        
                         <View style={styles.header}>
                             <Ionicons
                                 name="log-out-outline"
@@ -86,6 +91,7 @@ export default class HomeScreen extends React.Component {
                                 name="search"
                                 size={20}
                                 color="#ffffff"
+                                onPress={()=>this.props.navigation.navigate("RecommendedScreen")}
                             />
                         </View>
 
@@ -157,7 +163,7 @@ const styles = StyleSheet.create({
   },
   headerText:{
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: 'bold',
     color: 'white',
   },
   textInput:{
